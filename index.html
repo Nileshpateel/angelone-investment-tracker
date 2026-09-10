@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel One Investment Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="top-header">
+    <div>
+        <h1>Angel One Investment Tracker</h1>
+        <p>Investment & Profit Management Dashboard</p>
+    </div>
+    <div class="date-display" id="todayDate"></div>
+</header>
+
+<section class="account-section">
+
+    <div class="section-title">
+        <h2>Account Details</h2>
+    </div>
+
+    <div class="account-grid">
+
+        <div class="account-card">
+            <span>Full Name</span>
+            <strong>Nilesh Vamarao Patil</strong>
+        </div>
+
+        <div class="account-card">
+            <span>Client ID</span>
+            <strong>AJAD1057</strong>
+        </div>
+
+        <div class="account-card">
+            <span>PAN</span>
+            <strong>CRPPP6734G</strong>
+        </div>
+
+    </div>
+
+</section>
+
+<main>
+
+<section class="dashboard-section">
+
+    <div class="section-title">
+        <h2>Financial Overview</h2>
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-card capital-card">
+            <span>Total Capital</span>
+            <strong id="totalCapital">₹21,00,000</strong>
+            <small>Original Capital</small>
+        </div>
+
+        <div class="summary-card profit-card">
+            <span>Current Profit</span>
+            <strong id="currentProfit">₹47,120</strong>
+            <small>Profit Generated</small>
+        </div>
+
+        <div class="summary-card withdrawal-card">
+            <span>Total Withdrawn</span>
+            <strong id="totalWithdrawn">₹40,000</strong>
+            <small>Profit Withdrawals</small>
+        </div>
+
+        <div class="summary-card commission-card">
+            <span>Total Commission</span>
+            <strong id="totalCommission">₹7,120</strong>
+            <small>Commission Deducted</small>
+        </div>
+
+        <div class="summary-card net-card">
+            <span>Net Amount Received</span>
+            <strong id="netReceived">₹32,880</strong>
+            <small>After Commission</small>
+        </div>
+
+        <div class="summary-card today-card">
+            <span>Today's P&L</span>
+            <strong id="todayProfit">₹0</strong>
+            <small>Today's Result</small>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="allocation-section">
+
+    <div class="section-title">
+        <h2>Capital Allocation</h2>
+        <p>₹21,00,000 Total Capital</p>
+    </div>
+
+
+    <div class="allocation-group">
+
+        <div class="group-header">
+            <div>
+                <h3>Equity Indices</h3>
+                <span>NIFTY + SENSEX</span>
+            </div>
+
+            <strong>₹8,00,000</strong>
+        </div>
+
+        <div class="allocation-items">
+
+            <div class="allocation-item">
+                <label>NIFTY</label>
+
+                <div class="allocation-input">
+                    <input
+                        type="number"
+                        id="niftyPercent"
+                        value="50"
+                        min="0"
+                        max="100"
+                        onchange="updateAllocation()">
+                    <span>%</span>
+                </div>
+
+                <strong id="niftyAmount">₹4,00,000</strong>
+            </div>
+
+
+            <div class="allocation-item">
+                <label>SENSEX</label>
+
+                <div class="allocation-input">
+                    <input
+                        type="number"
+                        id="sensexPercent"
+                        value="50"
+                        min="0"
+                        max="100"
+                        onchange="updateAllocation()">
+                    <span>%</span>
+                </div>
+
+                <strong id="sensexAmount">₹4,00,000</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="allocation-group">
+
+        <div class="group-header">
+            <div>
+                <h3>Precious Metals</h3>
+                <span>GOLD + SILVER</span>
+            </div>
+
+            <strong>₹8,00,000</strong>
+        </div>
+
+        <div class="allocation-items">
+
+            <div class="allocation-item">
+                <label>GOLD</label>
+
+                <div class="allocation-input">
+                    <input
+                        type="number"
+                        id="goldPercent"
+                        value="50"
+                        min="0"
+                        max="100"
+                        onchange="updateAllocation()">
+                    <span>%</span>
+                </div>
+
+                <strong id="goldAmount">₹4,00,000</strong>
+            </div>
+
+
+            <div class="allocation-item">
+                <label>SILVER</label>
+
+                <div class="allocation-input">
+                    <input
+                        type="number"
+                        id="silverPercent"
+                        value="50"
+                        min="0"
+                        max="100"
+                        onchange="updateAllocation()">
+                    <span>%</span>
+                </div>
+
+                <strong id="silverAmount">₹4,00,000</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="allocation-group">
+
+        <div class="group-header">
+            <div>
+                <h3>Other Commodities</h3>
+                <span>CRUDE OIL + GOLD MINI + SILVER MINI + NATURAL GAS</span>
+            </div>
+
+            <strong>₹5,00,000</strong>
+        </div>
+
+        <div class="allocation-items">
+
+            <div class="allocation-item">
+                <label>CRUDE OIL</label>
+
+                <div class="allocation-input">
+                    <input
+                        type="number"
+                        id="crudePercent"
+                        value="25"
+                        min="0"
+                        max="100"
+                        onchange="updateAllocation()">
+                    <span>%</span>
+                </div>
+
+                <strong id="crudeAmount">₹1,25,000</strong>
+            </div>
+
+
+            <div class="allocation-item">
+                <label>GOLD MINI</label>
+
+                <div class="allocation-input">
+                    <input
+                        type="number"
+                        id="goldMiniPercent"
+                        value="25"
+                        min="0"
+                        max="100"
+                        onchange="updateAllocation()">
+                    <span>%</span>
+                </div>
+
+                <strong id="goldMiniAmount">₹1,25,000</strong>
+            </div>
+
+
+            <div class="allocation-item">
+                <label>SILVER MINI</label>
+
+                <div class="allocation-input">
+                    <input
+                        type="number"
+                        id="silverMiniPercent"
+                        value="25"
+                        min="0"
+                        max="100"
+                        onchange="updateAllocation()">
+                    <span>%</span>
+                </div>
+
+                <strong id="silverMiniAmount">₹1,25,000</strong>
+            </div>
+
+
+            <div class="allocation-item">
+                <label>NATURAL GAS</label>
+
+                <div class="allocation-input">
+                    <input
+                        type="number"
+                        id="gasPercent"
+                        value="25"
+                        min="0"
+                        max="100"
+                        onchange="updateAllocation()">
+                    <span>%</span>
+                </div>
+
+                <strong id="gasAmount">₹1,25,000</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="data-section">
+
+    <div class="section-title">
+        <h2>Daily Profit / Loss</h2>
+        <p>Enter your daily trading result</p>
+    </div>
+
+    <div class="entry-form">
+
+        <div>
+            <label>Date</label>
+            <input type="date" id="profitDate">
+        </div>
+
+        <div>
+            <label>Daily Profit</label>
+            <input
+                type="number"
+                id="dailyProfit"
+                placeholder="Enter profit">
+        </div>
+
+        <button onclick="addProfit()">
+            Add Daily Profit
+        </button>
+
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Daily Profit</th>
+                    <th>Running Profit</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="profitTableBody"></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<section class="data-section">
+
+    <div class="section-title">
+        <h2>Profit Withdrawals</h2>
+        <p>Withdrawal + Commission tracking</p>
+    </div>
+
+    <div class="entry-form">
+
+        <div>
+            <label>Date</label>
+            <input type="date" id="withdrawalDate">
+        </div>
+
+        <div>
+            <label>Withdrawal Amount</label>
+            <input
+                type="number"
+                id="withdrawalAmount"
+                placeholder="Example: 15000">
+        </div>
+
+        <div>
+            <label>Commission</label>
+            <input
+                type="number"
+                id="withdrawalCommission"
+                placeholder="Example: 2670">
+        </div>
+
+        <button onclick="addWithdrawal()">
+            Add Withdrawal
+        </button>
+
+    </div>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Date</th>
+                    <th>Withdrawal</th>
+                    <th>Commission</th>
+                    <th>Profit Amount</th>
+                    <th>Net Received</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="withdrawalTableBody"></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<section class="chart-section">
+
+    <div class="section-title">
+        <h2>Profit Performance</h2>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="profitChart"></canvas>
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <p>Angel One Investment Tracker</p>
+    <span>Personal Investment Record</span>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
