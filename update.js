@@ -3,7 +3,7 @@
 // ==========================================
 
 // Google Apps Script Web App URL
-const API_URL = "YOUR_EXISTING_WEB_APP_URL_HERE";
+const API_URL = "https://script.google.com/macros/s/AKfycbzlEjbk4fGXvZk7_mKbFC0b4tuJaCq1QwyC25bIxRrqrDeBZbuUsBgTD4-KZaS6R2dMfQ/exec";
 
 
 // ==========================================
