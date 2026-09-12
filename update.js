@@ -159,15 +159,13 @@ async function saveWithdrawal() {
 
     const result = await sendToDatabase({
 
-        action: "addWithdrawal",
+    action: "addWithdrawal",
 
-        date: date,
+    date: date,
 
-        withdrawal: withdrawal,
+    withdrawal: withdrawal,
 
-        commission: commission,
-
-        notes: ""
+    notes: ""
 
     });
 
@@ -178,7 +176,14 @@ async function saveWithdrawal() {
 
         document.getElementById("withdrawalAmount").value = "";
 
-        document.getElementById("withdrawalCommission").value = "";
+        if (result && result.status === "success") {
+
+    alert("Withdrawal has been saved.");
+
+    document.getElementById("withdrawalAmount").value = "";
+
+    loadTodaySummary();
+}
 
         loadTodaySummary();
     }
