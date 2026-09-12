@@ -2,8 +2,8 @@
 // ANGEL ONE TRACKER - DAILY UPDATE
 // ==========================================
 
-// Paste your Google Apps Script Web App URL below.
-const API_URL = "https://script.google.com/macros/s/AKfycbzlEjbk4fGXvZk7_mKbFC0b4tuJaCq1QwyC25bIxRrqrDeBZbuUsBgTD4-KZaS6R2dMfQ/exec";
+// Google Apps Script Web App URL
+const API_URL = "YOUR_EXISTING_WEB_APP_URL_HERE";
 
 
 // ==========================================
@@ -11,9 +11,11 @@ const API_URL = "https://script.google.com/macros/s/AKfycbzlEjbk4fGXvZk7_mKbFC0b
 // ==========================================
 
 function formatCurrency(amount) {
+
     return "₹" + Number(amount || 0).toLocaleString("en-IN", {
         maximumFractionDigits: 0
     });
+
 }
 
 
@@ -22,18 +24,24 @@ function formatCurrency(amount) {
 // ==========================================
 
 function getToday() {
+
     const now = new Date();
 
     const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const day = String(now.getDate()).padStart(2, "0");
+
+    const month =
+        String(now.getMonth() + 1).padStart(2, "0");
+
+    const day =
+        String(now.getDate()).padStart(2, "0");
 
     return `${year}-${month}-${day}`;
+
 }
 
 
 // ==========================================
-// SET DEFAULT DATE
+// SET DEFAULT DATES
 // ==========================================
 
 function setDefaultDates() {
@@ -43,6 +51,7 @@ function setDefaultDates() {
     document.getElementById("profitDate").value = today;
 
     document.getElementById("withdrawalDate").value = today;
+
 }
 
 
@@ -62,20 +71,30 @@ async function sendToDatabase(data) {
 
         });
 
+        if (!response.ok) {
+
+            throw new Error(
+                "Server returned HTTP " + response.status
+            );
+
+        }
+
         const result = await response.json();
 
         return result;
 
     } catch (error) {
 
-        console.error(error);
+        console.error("Database error:", error);
 
         alert(
             "Unable to connect to the Google Sheet database."
         );
 
         return null;
+
     }
+
 }
 
 
@@ -94,11 +113,21 @@ async function saveProfit() {
         );
 
 
-    if (!date || !profit) {
+    if (!date) {
 
-        alert("Please enter the date and profit amount.");
+        alert("Please select a date.");
 
         return;
+
+    }
+
+
+    if (!profit || profit <= 0) {
+
+        alert("Please enter a valid profit amount.");
+
+        return;
+
     }
 
 
@@ -121,7 +150,8 @@ async function saveProfit() {
 
         document.getElementById("dailyProfit").value = "";
 
-        loadTodaySummary();
+        await loadTodaySummary();
+
     }
 
 }
@@ -141,31 +171,40 @@ async function saveWithdrawal() {
             document.getElementById("withdrawalAmount").value
         );
 
-    const commission =
-        Number(
-            document.getElementById("withdrawalCommission").value
-        );
 
+    if (!date) {
 
-    if (!date || !withdrawal || !commission) {
-
-        alert(
-            "Please enter the date, withdrawal amount and commission."
-        );
+        alert("Please select a date.");
 
         return;
+
     }
+
+
+    if (!withdrawal || withdrawal <= 0) {
+
+        alert("Please enter a valid withdrawal amount.");
+
+        return;
+
+    }
+
+
+    // IMPORTANT:
+    // Commission is NOT entered here.
+    // Google Apps Script calculates it automatically
+    // using the Commission Rate in the Account sheet.
 
 
     const result = await sendToDatabase({
 
-    action: "addWithdrawal",
+        action: "addWithdrawal",
 
-    date: date,
+        date: date,
 
-    withdrawal: withdrawal,
+        withdrawal: withdrawal,
 
-    notes: ""
+        notes: ""
 
     });
 
@@ -176,16 +215,8 @@ async function saveWithdrawal() {
 
         document.getElementById("withdrawalAmount").value = "";
 
-        if (result && result.status === "success") {
+        await loadTodaySummary();
 
-    alert("Withdrawal has been saved.");
-
-    document.getElementById("withdrawalAmount").value = "";
-
-    loadTodaySummary();
-}
-
-        loadTodaySummary();
     }
 
 }
@@ -202,6 +233,10 @@ async function loadTodaySummary() {
 
     try {
 
+        // --------------------------------------
+        // GET DAILY PROFITS
+        // --------------------------------------
+
         const profitResponse = await fetch(API_URL, {
 
             method: "POST",
@@ -215,9 +250,20 @@ async function loadTodaySummary() {
         });
 
 
+        if (!profitResponse.ok) {
+
+            throw new Error("Unable to load profits.");
+
+        }
+
+
         const profits =
             await profitResponse.json();
 
+
+        // --------------------------------------
+        // GET WITHDRAWALS
+        // --------------------------------------
 
         const withdrawalResponse = await fetch(API_URL, {
 
@@ -232,9 +278,20 @@ async function loadTodaySummary() {
         });
 
 
+        if (!withdrawalResponse.ok) {
+
+            throw new Error("Unable to load withdrawals.");
+
+        }
+
+
         const withdrawals =
             await withdrawalResponse.json();
 
+
+        // --------------------------------------
+        // CALCULATE TODAY'S TOTALS
+        // --------------------------------------
 
         let todayProfit = 0;
 
@@ -270,9 +327,19 @@ async function loadTodaySummary() {
         });
 
 
+        // Profit consumed by today's withdrawals
+        const todayProfitAmount =
+            todayWithdrawal + todayCommission;
+
+
+        // Actual cash withdrawn
         const todayNet =
-    (todayWithdrawal + todayCommission) - todayCommission;
-        
+            todayProfitAmount - todayCommission;
+
+
+        // --------------------------------------
+        // DISPLAY SUMMARY
+        // --------------------------------------
 
         document.getElementById("todayProfit").textContent =
             formatCurrency(todayProfit);
@@ -290,11 +357,22 @@ async function loadTodaySummary() {
             formatCurrency(todayNet);
 
 
-        renderRecentUpdates(profits, withdrawals);
+        // --------------------------------------
+        // RECENT UPDATES
+        // --------------------------------------
+
+        renderRecentUpdates(
+            profits,
+            withdrawals
+        );
+
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Summary loading error:",
+            error
+        );
 
     }
 
@@ -307,13 +385,35 @@ async function loadTodaySummary() {
 
 function formatSheetDate(value) {
 
-    if (!value) return "";
+    if (!value) {
+
+        return "";
+
+    }
+
+
+    // Handle YYYY-MM-DD directly
+    // so timezone conversion doesn't shift the date.
+
+    if (
+        typeof value === "string" &&
+        /^\d{4}-\d{2}-\d{2}$/.test(value)
+    ) {
+
+        return value;
+
+    }
+
 
     const date = new Date(value);
 
+
     if (isNaN(date.getTime())) {
+
         return String(value);
+
     }
+
 
     const year =
         date.getFullYear();
@@ -324,7 +424,9 @@ function formatSheetDate(value) {
     const day =
         String(date.getDate()).padStart(2, "0");
 
+
     return `${year}-${month}-${day}`;
+
 }
 
 
@@ -332,10 +434,14 @@ function formatSheetDate(value) {
 // RECENT UPDATES
 // ==========================================
 
-function renderRecentUpdates(profits, withdrawals) {
+function renderRecentUpdates(
+    profits,
+    withdrawals
+) {
 
     const table =
         document.getElementById("recentUpdates");
+
 
     table.innerHTML = "";
 
@@ -343,67 +449,93 @@ function renderRecentUpdates(profits, withdrawals) {
     const updates = [];
 
 
+    // --------------------------------------
+    // PROFITS
+    // --------------------------------------
+
     profits.forEach(item => {
 
         updates.push({
 
-            date: formatSheetDate(item.date),
+            date:
+                formatSheetDate(item.date),
 
-            type: "Profit",
+            type:
+                "Profit",
 
-            amount: Number(item.profit) || 0,
+            amount:
+                Number(item.profit) || 0,
 
-            commission: 0
+            commission:
+                0
 
         });
 
     });
 
+
+    // --------------------------------------
+    // WITHDRAWALS
+    // --------------------------------------
 
     withdrawals.forEach(item => {
 
         updates.push({
 
-            date: formatSheetDate(item.date),
+            date:
+                formatSheetDate(item.date),
 
-            type: "Withdrawal",
+            type:
+                "Withdrawal",
 
-            amount: Number(item.withdrawal) || 0,
+            amount:
+                Number(item.withdrawal) || 0,
 
-            commission: Number(item.commission) || 0
+            commission:
+                Number(item.commission) || 0
 
         });
 
     });
 
+
+    // --------------------------------------
+    // SORT NEWEST FIRST
+    // --------------------------------------
 
     updates.sort((a, b) =>
         new Date(b.date) - new Date(a.date)
     );
 
 
-    updates.slice(0, 10).forEach(item => {
+    // --------------------------------------
+    // DISPLAY LAST 10
+    // --------------------------------------
 
-        const row =
-            document.createElement("tr");
+    updates
+        .slice(0, 10)
+        .forEach(item => {
 
-
-        row.innerHTML = `
-
-            <td>${item.date}</td>
-
-            <td>${item.type}</td>
-
-            <td>${formatCurrency(item.amount)}</td>
-
-            <td>${formatCurrency(item.commission)}</td>
-
-        `;
+            const row =
+                document.createElement("tr");
 
 
-        table.appendChild(row);
+            row.innerHTML = `
 
-    });
+                <td>${item.date}</td>
+
+                <td>${item.type}</td>
+
+                <td>${formatCurrency(item.amount)}</td>
+
+                <td>${formatCurrency(item.commission)}</td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        });
 
 }
 
