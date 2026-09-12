@@ -266,8 +266,8 @@ async function loadTodaySummary() {
 
 
         const todayNet =
-            todayWithdrawal - todayCommission;
-
+    (todayWithdrawal + todayCommission) - todayCommission;
+        
 
         document.getElementById("todayProfit").textContent =
             formatCurrency(todayProfit);
