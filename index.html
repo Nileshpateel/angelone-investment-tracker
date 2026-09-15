@@ -1,298 +1,642 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Angel One Investment Tracker</title>
+
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
 <header class="top-header">
+
     <div>
+
         <h1>Angel One Investment Tracker</h1>
-        <p>Investment & Profit Management Dashboard</p>
+
+        <p>
+            Investment & Profit Management Dashboard
+        </p>
+
     </div>
+
+
     <div class="date-display" id="todayDate"></div>
+
 </header>
+
+
+
+<!-- ==========================================
+     ACCOUNT DETAILS
+========================================== -->
 
 <section class="account-section">
 
     <div class="section-title">
+
         <h2>Account Details</h2>
+
     </div>
+
 
     <div class="account-grid">
 
+
         <div class="account-card">
+
             <span>Full Name</span>
-            <strong>Nilesh Vamarao Patil</strong>
+
+            <strong>
+                Nilesh Vamarao Patil
+            </strong>
+
         </div>
 
+
         <div class="account-card">
+
             <span>Client ID</span>
-            <strong>AJAD1057</strong>
+
+            <strong>
+                AJAD1057
+            </strong>
+
         </div>
 
+
         <div class="account-card">
+
             <span>PAN</span>
-            <strong>CRPPP6734G</strong>
+
+            <strong>
+                CRPPP6734G
+            </strong>
+
         </div>
+
 
     </div>
 
 </section>
 
+
+
 <main>
+
+
+<!-- ==========================================
+     DAILY UPDATE BUTTON
+========================================== -->
 
 <section class="dashboard-section">
 
     <div class="section-title">
+
         <h2>Financial Overview</h2>
+
+        <p>
+            Current investment and profit position
+        </p>
+
     </div>
+
+
+    <div
+        style="
+        text-align:center;
+        margin-bottom:25px;
+        "
+    >
+
+        <a
+            href="update.html"
+            style="
+            display:inline-block;
+            padding:12px 24px;
+            background:#2563eb;
+            color:white;
+            text-decoration:none;
+            border-radius:8px;
+            font-weight:600;
+            "
+        >
+
+            + Update Today's Profit / Withdrawal
+
+        </a>
+
+    </div>
+
 
     <div class="summary-grid">
 
+
+        <!-- TOTAL CAPITAL -->
+
         <div class="summary-card capital-card">
+
             <span>Total Capital</span>
-            <strong id="totalCapital">₹21,00,000</strong>
-            <small>Original Capital</small>
+
+            <strong id="totalCapital">
+                ₹21,00,000
+            </strong>
+
+            <small>
+                Original Invested Capital
+            </small>
+
         </div>
+
+
+
+        <!-- CURRENT PROFIT -->
 
         <div class="summary-card profit-card">
+
             <span>Current Profit</span>
-            <strong id="currentProfit">₹47,120</strong>
-            <small>Profit Generated</small>
+
+            <strong id="currentProfit">
+                ₹91,884
+            </strong>
+
+            <small>
+                Profit Generated
+            </small>
+
         </div>
+
+
+
+        <!-- TOTAL WITHDRAWN -->
 
         <div class="summary-card withdrawal-card">
+
             <span>Total Withdrawn</span>
-            <strong id="totalWithdrawn">₹40,000</strong>
-            <small>Profit Withdrawals</small>
+
+            <strong id="totalWithdrawn">
+                ₹78,000
+            </strong>
+
+            <small>
+                Profit Withdrawals
+            </small>
+
         </div>
+
+
+
+        <!-- TOTAL COMMISSION -->
 
         <div class="summary-card commission-card">
+
             <span>Total Commission</span>
-            <strong id="totalCommission">₹7,120</strong>
-            <small>Commission Deducted</small>
+
+            <strong id="totalCommission">
+                ₹13,884
+            </strong>
+
+            <small>
+                Commission Deducted From Profit
+            </small>
+
         </div>
+
+
+
+        <!-- NET RECEIVED -->
 
         <div class="summary-card net-card">
+
             <span>Net Amount Received</span>
-            <strong id="netReceived">₹32,880</strong>
-            <small>After Commission</small>
+
+            <strong id="netReceived">
+                ₹78,000
+            </strong>
+
+            <small>
+                Actual Cash Received
+            </small>
+
         </div>
 
+
+
+        <!-- TODAY'S P&L -->
+
         <div class="summary-card today-card">
-            <span>Today's P&L</span>
-            <strong id="todayProfit">₹0</strong>
-            <small>Today's Result</small>
+
+            <span>Today's P&amp;L</span>
+
+            <strong id="todayProfit">
+                ₹0
+            </strong>
+
+            <small>
+                Today's Result
+            </small>
+
         </div>
+
 
     </div>
 
 </section>
 
 
+
+<!-- ==========================================
+     CAPITAL ALLOCATION
+========================================== -->
+
 <section class="allocation-section">
 
+
     <div class="section-title">
+
         <h2>Capital Allocation</h2>
-        <p>₹21,00,000 Total Capital</p>
+
+        <p>
+            ₹21,00,000 Total Invested Capital
+        </p>
+
     </div>
 
 
+
+    <!-- ======================================
+         EQUITY INDICES
+    ======================================= -->
+
     <div class="allocation-group">
 
+
         <div class="group-header">
+
             <div>
-                <h3>Equity Indices</h3>
-                <span>NIFTY + SENSEX</span>
+
+                <h3>
+                    Equity Indices
+                </h3>
+
+                <span>
+                    NIFTY + SENSEX
+                </span>
+
             </div>
 
-            <strong>₹8,00,000</strong>
+
+            <strong>
+                ₹8,00,000
+            </strong>
+
         </div>
+
+
 
         <div class="allocation-items">
 
+
             <div class="allocation-item">
-                <label>NIFTY</label>
+
+                <label>
+                    NIFTY
+                </label>
+
 
                 <div class="allocation-input">
+
                     <input
                         type="number"
                         id="niftyPercent"
                         value="50"
                         min="0"
                         max="100"
-                        onchange="updateAllocation()">
+                        onchange="updateAllocation()"
+                    >
+
                     <span>%</span>
+
                 </div>
 
-                <strong id="niftyAmount">₹4,00,000</strong>
+
+                <strong id="niftyAmount">
+                    ₹4,00,000
+                </strong>
+
             </div>
 
 
+
             <div class="allocation-item">
-                <label>SENSEX</label>
+
+                <label>
+                    SENSEX
+                </label>
+
 
                 <div class="allocation-input">
+
                     <input
                         type="number"
                         id="sensexPercent"
                         value="50"
                         min="0"
                         max="100"
-                        onchange="updateAllocation()">
+                        onchange="updateAllocation()"
+                    >
+
                     <span>%</span>
+
                 </div>
 
-                <strong id="sensexAmount">₹4,00,000</strong>
+
+                <strong id="sensexAmount">
+                    ₹4,00,000
+                </strong>
+
             </div>
+
 
         </div>
 
     </div>
 
 
+
+    <!-- ======================================
+         PRECIOUS METALS
+    ======================================= -->
+
     <div class="allocation-group">
 
+
         <div class="group-header">
+
             <div>
-                <h3>Precious Metals</h3>
-                <span>GOLD + SILVER</span>
+
+                <h3>
+                    Precious Metals
+                </h3>
+
+                <span>
+                    GOLD + SILVER
+                </span>
+
             </div>
 
-            <strong>₹8,00,000</strong>
+
+            <strong>
+                ₹8,00,000
+            </strong>
+
         </div>
+
+
 
         <div class="allocation-items">
 
+
             <div class="allocation-item">
-                <label>GOLD</label>
+
+                <label>
+                    GOLD
+                </label>
+
 
                 <div class="allocation-input">
+
                     <input
                         type="number"
                         id="goldPercent"
                         value="50"
                         min="0"
                         max="100"
-                        onchange="updateAllocation()">
+                        onchange="updateAllocation()"
+                    >
+
                     <span>%</span>
+
                 </div>
 
-                <strong id="goldAmount">₹4,00,000</strong>
+
+                <strong id="goldAmount">
+                    ₹4,00,000
+                </strong>
+
             </div>
 
 
+
             <div class="allocation-item">
-                <label>SILVER</label>
+
+                <label>
+                    SILVER
+                </label>
+
 
                 <div class="allocation-input">
+
                     <input
                         type="number"
                         id="silverPercent"
                         value="50"
                         min="0"
                         max="100"
-                        onchange="updateAllocation()">
+                        onchange="updateAllocation()"
+                    >
+
                     <span>%</span>
+
                 </div>
 
-                <strong id="silverAmount">₹4,00,000</strong>
+
+                <strong id="silverAmount">
+                    ₹4,00,000
+                </strong>
+
             </div>
+
 
         </div>
 
     </div>
 
 
+
+    <!-- ======================================
+         OTHER COMMODITIES
+    ======================================= -->
+
     <div class="allocation-group">
 
+
         <div class="group-header">
+
             <div>
-                <h3>Other Commodities</h3>
-                <span>CRUDE OIL + GOLD MINI + SILVER MINI + NATURAL GAS</span>
+
+                <h3>
+                    Other Commodities
+                </h3>
+
+                <span>
+                    CRUDE OIL + GOLD MINI +
+                    SILVER MINI + NATURAL GAS
+                </span>
+
             </div>
 
-            <strong>₹5,00,000</strong>
+
+            <strong>
+                ₹5,00,000
+            </strong>
+
         </div>
+
+
 
         <div class="allocation-items">
 
+
             <div class="allocation-item">
-                <label>CRUDE OIL</label>
+
+                <label>
+                    CRUDE OIL
+                </label>
+
 
                 <div class="allocation-input">
+
                     <input
                         type="number"
                         id="crudePercent"
                         value="25"
                         min="0"
                         max="100"
-                        onchange="updateAllocation()">
+                        onchange="updateAllocation()"
+                    >
+
                     <span>%</span>
+
                 </div>
 
-                <strong id="crudeAmount">₹1,25,000</strong>
+
+                <strong id="crudeAmount">
+                    ₹1,25,000
+                </strong>
+
             </div>
 
 
+
             <div class="allocation-item">
-                <label>GOLD MINI</label>
+
+                <label>
+                    GOLD MINI
+                </label>
+
 
                 <div class="allocation-input">
+
                     <input
                         type="number"
                         id="goldMiniPercent"
                         value="25"
                         min="0"
                         max="100"
-                        onchange="updateAllocation()">
+                        onchange="updateAllocation()"
+                    >
+
                     <span>%</span>
+
                 </div>
 
-                <strong id="goldMiniAmount">₹1,25,000</strong>
+
+                <strong id="goldMiniAmount">
+                    ₹1,25,000
+                </strong>
+
             </div>
 
 
+
             <div class="allocation-item">
-                <label>SILVER MINI</label>
+
+                <label>
+                    SILVER MINI
+                </label>
+
 
                 <div class="allocation-input">
+
                     <input
                         type="number"
                         id="silverMiniPercent"
                         value="25"
                         min="0"
                         max="100"
-                        onchange="updateAllocation()">
+                        onchange="updateAllocation()"
+                    >
+
                     <span>%</span>
+
                 </div>
 
-                <strong id="silverMiniAmount">₹1,25,000</strong>
+
+                <strong id="silverMiniAmount">
+                    ₹1,25,000
+                </strong>
+
             </div>
 
 
+
             <div class="allocation-item">
-                <label>NATURAL GAS</label>
+
+                <label>
+                    NATURAL GAS
+                </label>
+
 
                 <div class="allocation-input">
+
                     <input
                         type="number"
                         id="gasPercent"
                         value="25"
                         min="0"
                         max="100"
-                        onchange="updateAllocation()">
+                        onchange="updateAllocation()"
+                    >
+
                     <span>%</span>
+
                 </div>
 
-                <strong id="gasAmount">₹1,25,000</strong>
+
+                <strong id="gasAmount">
+                    ₹1,25,000
+                </strong>
+
             </div>
 
+
         </div>
 
     </div>
@@ -300,48 +644,234 @@
 </section>
 
 
+
+<!-- ==========================================
+     WITHDRAWAL HISTORY
+========================================== -->
+
 <section class="data-section">
 
+
     <div class="section-title">
-        <h2>Daily Profit / Loss</h2>
-        <p>Enter your daily trading result</p>
-    </div>
 
-    <div class="entry-form">
+        <h2>
+            Profit Withdrawal History
+        </h2>
 
-        <div>
-            <label>Date</label>
-            <input type="date" id="profitDate">
-        </div>
-
-        <div>
-            <label>Daily Profit</label>
-            <input
-                type="number"
-                id="dailyProfit"
-                placeholder="Enter profit">
-        </div>
-
-        <button onclick="addProfit()">
-            Add Daily Profit
-        </button>
+        <p>
+            Withdrawal and commission record
+        </p>
 
     </div>
+
+
 
     <div class="table-container">
 
         <table>
 
+
             <thead>
+
                 <tr>
-                    <th>Date</th>
-                    <th>Daily Profit</th>
-                    <th>Running Profit</th>
-                    <th>Action</th>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Withdrawal
+                    </th>
+
+                    <th>
+                        Commission
+                    </th>
+
+                    <th>
+                        Profit Amount
+                    </th>
+
+                    <th>
+                        Net Received
+                    </th>
+
                 </tr>
+
             </thead>
 
-            <tbody id="profitTableBody"></tbody>
+
+
+            <tbody id="withdrawalTableBody">
+
+
+                <!-- 01 SEPTEMBER -->
+
+                <tr>
+
+                    <td>
+                        01 Sep 2026
+                    </td>
+
+                    <td>
+                        ₹15,000
+                    </td>
+
+                    <td>
+                        ₹2,670
+                    </td>
+
+                    <td>
+                        ₹17,670
+                    </td>
+
+                    <td>
+                        ₹15,000
+                    </td>
+
+                </tr>
+
+
+
+                <!-- 02 SEPTEMBER -->
+
+                <tr>
+
+                    <td>
+                        02 Sep 2026
+                    </td>
+
+                    <td>
+                        ₹10,000
+                    </td>
+
+                    <td>
+                        ₹1,780
+                    </td>
+
+                    <td>
+                        ₹11,780
+                    </td>
+
+                    <td>
+                        ₹10,000
+                    </td>
+
+                </tr>
+
+
+
+                <!-- 07 SEPTEMBER -->
+
+                <tr>
+
+                    <td>
+                        07 Sep 2026
+                    </td>
+
+                    <td>
+                        ₹15,000
+                    </td>
+
+                    <td>
+                        ₹2,670
+                    </td>
+
+                    <td>
+                        ₹17,670
+                    </td>
+
+                    <td>
+                        ₹15,000
+                    </td>
+
+                </tr>
+
+
+
+                <!-- 10 SEPTEMBER -->
+
+                <tr>
+
+                    <td>
+                        10 Sep 2026
+                    </td>
+
+                    <td>
+                        ₹15,000
+                    </td>
+
+                    <td>
+                        ₹2,670
+                    </td>
+
+                    <td>
+                        ₹17,670
+                    </td>
+
+                    <td>
+                        ₹15,000
+                    </td>
+
+                </tr>
+
+
+
+                <!-- 11 SEPTEMBER -->
+
+                <tr>
+
+                    <td>
+                        11 Sep 2026
+                    </td>
+
+                    <td>
+                        ₹8,000
+                    </td>
+
+                    <td>
+                        ₹1,424
+                    </td>
+
+                    <td>
+                        ₹9,424
+                    </td>
+
+                    <td>
+                        ₹8,000
+                    </td>
+
+                </tr>
+
+
+
+                <!-- 15 SEPTEMBER -->
+
+                <tr>
+
+                    <td>
+                        15 Sep 2026
+                    </td>
+
+                    <td>
+                        ₹15,000
+                    </td>
+
+                    <td>
+                        ₹2,670
+                    </td>
+
+                    <td>
+                        ₹17,670
+                    </td>
+
+                    <td>
+                        ₹15,000
+                    </td>
+
+                </tr>
+
+
+            </tbody>
 
         </table>
 
@@ -350,94 +880,64 @@
 </section>
 
 
-<section class="data-section">
 
-    <div class="section-title">
-        <h2>Profit Withdrawals</h2>
-        <p>Withdrawal + Commission tracking</p>
-    </div>
-
-    <div class="entry-form">
-
-        <div>
-            <label>Date</label>
-            <input type="date" id="withdrawalDate">
-        </div>
-
-        <div>
-            <label>Withdrawal Amount</label>
-            <input
-                type="number"
-                id="withdrawalAmount"
-                placeholder="Example: 15000">
-        </div>
-
-        <div>
-            <label>Commission</label>
-            <input
-                type="number"
-                id="withdrawalCommission"
-                placeholder="Example: 2670">
-        </div>
-
-        <button onclick="addWithdrawal()">
-            Add Withdrawal
-        </button>
-
-    </div>
-
-
-    <div class="table-container">
-
-        <table>
-
-            <thead>
-
-                <tr>
-                    <th>Date</th>
-                    <th>Withdrawal</th>
-                    <th>Commission</th>
-                    <th>Profit Amount</th>
-                    <th>Net Received</th>
-                    <th>Action</th>
-                </tr>
-
-            </thead>
-
-            <tbody id="withdrawalTableBody"></tbody>
-
-        </table>
-
-    </div>
-
-</section>
-
+<!-- ==========================================
+     PROFIT PERFORMANCE
+========================================== -->
 
 <section class="chart-section">
 
+
     <div class="section-title">
-        <h2>Profit Performance</h2>
+
+        <h2>
+            Profit Performance
+        </h2>
+
     </div>
+
 
     <div class="chart-container">
+
         <canvas id="profitChart"></canvas>
+
     </div>
 
+
 </section>
+
 
 </main>
 
 
+
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
 <footer>
 
-    <p>Angel One Investment Tracker</p>
-    <span>Personal Investment Record</span>
+    <p>
+        Angel One Investment Tracker
+    </p>
+
+    <span>
+        Personal Investment Record
+    </span>
 
 </footer>
 
 
+
+<!-- ==========================================
+     SCRIPTS
+========================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
