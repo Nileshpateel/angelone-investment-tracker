@@ -1,33 +1,48 @@
-// ==========================================
-// ANGEL ONE TRACKER - DAILY UPDATE
-// ==========================================
-
-// Google Apps Script Web App URL
-const API_URL = "https://script.google.com/macros/s/AKfycbzlEjbk4fGXvZk7_mKbFC0b4tuJaCq1QwyC25bIxRrqrDeBZbuUsBgTD4-KZaS6R2dMfQ/exec";
+// ==========================================================
+// ANGEL ONE TRACKER - ENTRY PAGE
+// ==========================================================
 
 
-// ==========================================
+// ==========================================================
+// APPS SCRIPT WEB APP URL
+// ==========================================================
+
+const API_URL =
+    "PASTE_YOUR_DEPLOYED_APPS_SCRIPT_URL_HERE";
+
+
+// ==========================================================
+// COMMISSION RATE
+// ==========================================================
+
+const COMMISSION_RATE = 0.178;
+
+
+// ==========================================================
 // CURRENCY FORMAT
-// ==========================================
+// ==========================================================
 
 function formatCurrency(amount) {
 
     return "₹" + Number(amount || 0).toLocaleString("en-IN", {
+
         maximumFractionDigits: 0
+
     });
 
 }
 
 
-// ==========================================
-// TODAY'S DATE
-// ==========================================
+// ==========================================================
+// TODAY
+// ==========================================================
 
 function getToday() {
 
     const now = new Date();
 
-    const year = now.getFullYear();
+    const year =
+        now.getFullYear();
 
     const month =
         String(now.getMonth() + 1).padStart(2, "0");
@@ -40,56 +55,80 @@ function getToday() {
 }
 
 
-// ==========================================
+// ==========================================================
 // SET DEFAULT DATES
-// ==========================================
+// ==========================================================
 
 function setDefaultDates() {
 
     const today = getToday();
 
-    document.getElementById("profitDate").value = today;
 
-    document.getElementById("withdrawalDate").value = today;
+    document.getElementById(
+        "profitDate"
+    ).value = today;
+
+
+    document.getElementById(
+        "withdrawalDate"
+    ).value = today;
 
 }
 
 
-// ==========================================
-// SEND DATA TO GOOGLE SHEETS
-// ==========================================
+// ==========================================================
+// SEND DATA TO APPS SCRIPT
+// ==========================================================
 
 async function sendToDatabase(data) {
 
     try {
 
-        const response = await fetch(API_URL, {
+        const response = await fetch(
 
-            method: "POST",
+            API_URL,
 
-            body: JSON.stringify(data)
+            {
 
-        });
+                method: "POST",
+
+                body: JSON.stringify(data)
+
+            }
+
+        );
+
 
         if (!response.ok) {
 
             throw new Error(
-                "Server returned HTTP " + response.status
+                "Server returned HTTP " +
+                response.status
             );
 
         }
 
-        const result = await response.json();
+
+        const result =
+            await response.json();
+
 
         return result;
 
+
     } catch (error) {
 
-        console.error("Database error:", error);
+        console.error(
+            "Database error:",
+            error
+        );
+
 
         alert(
-            "Unable to connect to the Google Sheet database."
+            "Unable to connect to the database.\n\n" +
+            "Please check the Apps Script deployment URL."
         );
+
 
         return null;
 
@@ -98,57 +137,119 @@ async function sendToDatabase(data) {
 }
 
 
-// ==========================================
-// SAVE PROFIT
-// ==========================================
+// ==========================================================
+// SAVE DAILY PROFIT / LOSS
+// ==========================================================
 
 async function saveProfit() {
 
+
     const date =
-        document.getElementById("profitDate").value;
+        document.getElementById(
+            "profitDate"
+        ).value;
+
 
     const profit =
         Number(
-            document.getElementById("dailyProfit").value
-        );
+            document.getElementById(
+                "dailyProfit"
+            ).value
+        ) || 0;
+
+
+    const loss =
+        Number(
+            document.getElementById(
+                "dailyLoss"
+            ).value
+        ) || 0;
+
+
+    const notes =
+        document.getElementById(
+            "profitNotes"
+        ).value.trim();
 
 
     if (!date) {
 
-        alert("Please select a date.");
+        alert(
+            "Please select a date."
+        );
 
         return;
 
     }
 
 
-    if (!profit || profit <= 0) {
+    if (profit === 0 && loss === 0) {
 
-        alert("Please enter a valid profit amount.");
+        alert(
+            "Please enter a profit or loss amount."
+        );
 
         return;
 
     }
 
 
-    const result = await sendToDatabase({
+    if (profit < 0 || loss < 0) {
 
-        action: "addDailyProfit",
+        alert(
+            "Profit and loss cannot be negative."
+        );
 
-        date: date,
+        return;
 
-        profit: profit,
-
-        notes: ""
-
-    });
+    }
 
 
-    if (result && result.status === "success") {
+    const result =
+        await sendToDatabase({
 
-        alert("Today's profit has been saved.");
+            action:
+                "addDailyProfit",
 
-        document.getElementById("dailyProfit").value = "";
+            date:
+                date,
+
+            profit:
+                profit,
+
+            loss:
+                loss,
+
+            notes:
+                notes
+
+        });
+
+
+    if (
+        result &&
+        result.status === "success"
+    ) {
+
+        alert(
+            "Daily result saved successfully."
+        );
+
+
+        document.getElementById(
+            "dailyProfit"
+        ).value = "";
+
+
+        document.getElementById(
+            "dailyLoss"
+        ).value = "0";
+
+
+        document.getElementById(
+            "profitNotes"
+        ).value = "";
+
 
         await loadTodaySummary();
 
@@ -157,63 +258,157 @@ async function saveProfit() {
 }
 
 
-// ==========================================
+// ==========================================================
 // SAVE WITHDRAWAL
-// ==========================================
+// ==========================================================
 
 async function saveWithdrawal() {
 
+
     const date =
-        document.getElementById("withdrawalDate").value;
+        document.getElementById(
+            "withdrawalDate"
+        ).value;
+
 
     const withdrawal =
         Number(
-            document.getElementById("withdrawalAmount").value
-        );
+            document.getElementById(
+                "withdrawalAmount"
+            ).value
+        ) || 0;
+
+
+    const notes =
+        document.getElementById(
+            "withdrawalNotes"
+        ).value.trim();
 
 
     if (!date) {
 
-        alert("Please select a date.");
+        alert(
+            "Please select a date."
+        );
 
         return;
 
     }
 
 
-    if (!withdrawal || withdrawal <= 0) {
+    if (withdrawal <= 0) {
 
-        alert("Please enter a valid withdrawal amount.");
+        alert(
+            "Please enter a valid withdrawal amount."
+        );
 
         return;
 
     }
 
 
-    // IMPORTANT:
-    // Commission is NOT entered here.
-    // Google Apps Script calculates it automatically
-    // using the Commission Rate in the Account sheet.
+    // ------------------------------------------------------
+    // Commission preview
+    // ------------------------------------------------------
+
+    const commission =
+        Math.round(
+            withdrawal *
+            COMMISSION_RATE
+        );
 
 
-    const result = await sendToDatabase({
-
-        action: "addWithdrawal",
-
-        date: date,
-
-        withdrawal: withdrawal,
-
-        notes: ""
-
-    });
+    const profitAmount =
+        withdrawal +
+        commission;
 
 
-    if (result && result.status === "success") {
+    const confirmation =
+        confirm(
 
-        alert("Withdrawal has been saved.");
+            "Withdrawal: " +
+            formatCurrency(withdrawal) +
 
-        document.getElementById("withdrawalAmount").value = "";
+            "\nCommission: " +
+            formatCurrency(commission) +
+
+            "\nProfit Amount: " +
+            formatCurrency(profitAmount) +
+
+            "\nNet Received: " +
+            formatCurrency(withdrawal) +
+
+            "\n\nSave this withdrawal?"
+
+        );
+
+
+    if (!confirmation) {
+
+        return;
+
+    }
+
+
+    const result =
+        await sendToDatabase({
+
+            action:
+                "addWithdrawal",
+
+            date:
+                date,
+
+            withdrawal:
+                withdrawal,
+
+            notes:
+                notes
+
+        });
+
+
+    if (
+        result &&
+        result.status === "success"
+    ) {
+
+        alert(
+
+            "Withdrawal saved successfully.\n\n" +
+
+            "Withdrawal: " +
+            formatCurrency(
+                result.withdrawal
+            ) +
+
+            "\nCommission: " +
+            formatCurrency(
+                result.commission
+            ) +
+
+            "\nProfit Amount: " +
+            formatCurrency(
+                result.profitAmount
+            ) +
+
+            "\nNet Received: " +
+            formatCurrency(
+                result.netReceived
+            )
+
+        );
+
+
+        document.getElementById(
+            "withdrawalAmount"
+        ).value = "";
+
+
+        document.getElementById(
+            "withdrawalNotes"
+        ).value = "";
+
 
         await loadTodaySummary();
 
@@ -222,155 +417,186 @@ async function saveWithdrawal() {
 }
 
 
-// ==========================================
+// ==========================================================
 // LOAD TODAY'S SUMMARY
-// ==========================================
+// ==========================================================
 
 async function loadTodaySummary() {
-
-    const today = getToday();
 
 
     try {
 
-        // --------------------------------------
-        // GET DAILY PROFITS
-        // --------------------------------------
 
-        const profitResponse = await fetch(API_URL, {
+        const response =
+            await fetch(
 
-            method: "POST",
+                API_URL +
+                "?action=getDashboard"
 
-            body: JSON.stringify({
-
-                action: "getDailyProfits"
-
-            })
-
-        });
+            );
 
 
-        if (!profitResponse.ok) {
+        if (!response.ok) {
 
-            throw new Error("Unable to load profits.");
+            throw new Error(
+                "HTTP " +
+                response.status
+            );
 
         }
 
 
-        const profits =
-            await profitResponse.json();
+        const data =
+            await response.json();
 
 
-        // --------------------------------------
-        // GET WITHDRAWALS
-        // --------------------------------------
+        if (
+            !data ||
+            data.status !== "success"
+        ) {
 
-        const withdrawalResponse = await fetch(API_URL, {
-
-            method: "POST",
-
-            body: JSON.stringify({
-
-                action: "getWithdrawals"
-
-            })
-
-        });
-
-
-        if (!withdrawalResponse.ok) {
-
-            throw new Error("Unable to load withdrawals.");
+            throw new Error(
+                data.message ||
+                "Unable to load dashboard."
+            );
 
         }
 
 
-        const withdrawals =
-            await withdrawalResponse.json();
+        const today =
+            getToday();
 
 
-        // --------------------------------------
-        // CALCULATE TODAY'S TOTALS
-        // --------------------------------------
+        let todayProfit =
+            0;
 
-        let todayProfit = 0;
+        let todayWithdrawal =
+            0;
 
-        let todayWithdrawal = 0;
-
-        let todayCommission = 0;
-
-
-        profits.forEach(item => {
-
-            if (formatSheetDate(item.date) === today) {
-
-                todayProfit +=
-                    Number(item.profit) || 0;
-
-            }
-
-        });
+        let todayCommission =
+            0;
 
 
-        withdrawals.forEach(item => {
+        // --------------------------------------------------
+        // DAILY PROFITS
+        // --------------------------------------------------
 
-            if (formatSheetDate(item.date) === today) {
+        if (
+            Array.isArray(
+                data.dailyProfits
+            )
+        ) {
 
-                todayWithdrawal +=
-                    Number(item.withdrawal) || 0;
+            data.dailyProfits.forEach(
+                function(item) {
 
-                todayCommission +=
-                    Number(item.commission) || 0;
+                    if (
+                        formatSheetDate(
+                            item.date
+                        ) === today
+                    ) {
 
-            }
+                        todayProfit +=
+                            Number(
+                                item.netPnl
+                            ) || 0;
 
-        });
+                    }
+
+                }
+            );
+
+        }
 
 
-        // Profit consumed by today's withdrawals
-        const todayProfitAmount =
-            todayWithdrawal + todayCommission;
+        // --------------------------------------------------
+        // WITHDRAWALS
+        // --------------------------------------------------
+
+        if (
+            Array.isArray(
+                data.withdrawals
+            )
+        ) {
+
+            data.withdrawals.forEach(
+                function(item) {
+
+                    if (
+                        formatSheetDate(
+                            item.date
+                        ) === today
+                    ) {
+
+                        todayWithdrawal +=
+                            Number(
+                                item.withdrawal
+                            ) || 0;
 
 
-        // Actual cash withdrawn
+                        todayCommission +=
+                            Number(
+                                item.commission
+                            ) || 0;
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        // --------------------------------------------------
+        // NET RECEIVED
+        // --------------------------------------------------
+
         const todayNet =
-            todayProfitAmount - todayCommission;
+            todayWithdrawal;
 
 
-        // --------------------------------------
-        // DISPLAY SUMMARY
-        // --------------------------------------
-
-        document.getElementById("todayProfit").textContent =
-            formatCurrency(todayProfit);
-
-
-        document.getElementById("todayWithdrawal").textContent =
-            formatCurrency(todayWithdrawal);
+        document.getElementById(
+            "todayProfit"
+        ).textContent =
+            formatCurrency(
+                todayProfit
+            );
 
 
-        document.getElementById("todayCommission").textContent =
-            formatCurrency(todayCommission);
+        document.getElementById(
+            "todayWithdrawal"
+        ).textContent =
+            formatCurrency(
+                todayWithdrawal
+            );
 
 
-        document.getElementById("todayNet").textContent =
-            formatCurrency(todayNet);
+        document.getElementById(
+            "todayCommission"
+        ).textContent =
+            formatCurrency(
+                todayCommission
+            );
 
 
-        // --------------------------------------
-        // RECENT UPDATES
-        // --------------------------------------
+        document.getElementById(
+            "todayNet"
+        ).textContent =
+            formatCurrency(
+                todayNet
+            );
+
 
         renderRecentUpdates(
-            profits,
-            withdrawals
+            data.dailyProfits || [],
+            data.withdrawals || []
         );
 
 
     } catch (error) {
 
         console.error(
-            "Summary loading error:",
+            "Dashboard error:",
             error
         );
 
@@ -379,11 +605,12 @@ async function loadTodaySummary() {
 }
 
 
-// ==========================================
-// GOOGLE SHEET DATE CONVERSION
-// ==========================================
+// ==========================================================
+// SHEET DATE → YYYY-MM-DD
+// ==========================================================
 
 function formatSheetDate(value) {
+
 
     if (!value) {
 
@@ -392,55 +619,82 @@ function formatSheetDate(value) {
     }
 
 
-    // Handle YYYY-MM-DD directly
-    // so timezone conversion doesn't shift the date.
+    const date =
+        new Date(value);
+
 
     if (
-        typeof value === "string" &&
-        /^\d{4}-\d{2}-\d{2}$/.test(value)
+        isNaN(
+            date.getTime()
+        )
     ) {
-
-        return value;
-
-    }
-
-
-    const date = new Date(value);
-
-
-    if (isNaN(date.getTime())) {
 
         return String(value);
 
     }
 
 
-    const year =
-        date.getFullYear();
+    /*
+       Apps Script sends Sheet dates as UTC strings.
 
-    const month =
-        String(date.getMonth() + 1).padStart(2, "0");
+       Example:
 
-    const day =
-        String(date.getDate()).padStart(2, "0");
+       2026-09-01 in India
+
+       may arrive as:
+
+       2026-08-31T18:30:00.000Z
+
+       We therefore convert using
+       Indian Standard Time.
+    */
 
 
-    return `${year}-${month}-${day}`;
+    const formatter =
+        new Intl.DateTimeFormat(
+
+            "en-CA",
+
+            {
+
+                timeZone:
+                    "Asia/Kolkata",
+
+                year:
+                    "numeric",
+
+                month:
+                    "2-digit",
+
+                day:
+                    "2-digit"
+
+            }
+
+        );
+
+
+    return formatter.format(
+        date
+    );
 
 }
 
 
-// ==========================================
+// ==========================================================
 // RECENT UPDATES
-// ==========================================
+// ==========================================================
 
 function renderRecentUpdates(
     profits,
     withdrawals
 ) {
 
+
     const table =
-        document.getElementById("recentUpdates");
+        document.getElementById(
+            "recentUpdates"
+        );
 
 
     table.innerHTML = "";
@@ -449,100 +703,140 @@ function renderRecentUpdates(
     const updates = [];
 
 
-    // --------------------------------------
+    // ------------------------------------------------------
     // PROFITS
-    // --------------------------------------
+    // ------------------------------------------------------
 
-    profits.forEach(item => {
+    profits.forEach(
+        function(item) {
 
-        updates.push({
+            updates.push({
 
-            date:
-                formatSheetDate(item.date),
+                date:
+                    formatSheetDate(
+                        item.date
+                    ),
 
-            type:
-                "Profit",
+                type:
+                    "Daily P&L",
 
-            amount:
-                Number(item.profit) || 0,
+                amount:
+                    Number(
+                        item.netPnl
+                    ) || 0,
 
-            commission:
-                0
+                commission:
+                    0
 
-        });
+            });
 
-    });
-
-
-    // --------------------------------------
-    // WITHDRAWALS
-    // --------------------------------------
-
-    withdrawals.forEach(item => {
-
-        updates.push({
-
-            date:
-                formatSheetDate(item.date),
-
-            type:
-                "Withdrawal",
-
-            amount:
-                Number(item.withdrawal) || 0,
-
-            commission:
-                Number(item.commission) || 0
-
-        });
-
-    });
-
-
-    // --------------------------------------
-    // SORT NEWEST FIRST
-    // --------------------------------------
-
-    updates.sort((a, b) =>
-        new Date(b.date) - new Date(a.date)
+        }
     );
 
 
-    // --------------------------------------
-    // DISPLAY LAST 10
-    // --------------------------------------
+    // ------------------------------------------------------
+    // WITHDRAWALS
+    // ------------------------------------------------------
+
+    withdrawals.forEach(
+        function(item) {
+
+            updates.push({
+
+                date:
+                    formatSheetDate(
+                        item.date
+                    ),
+
+                type:
+                    "Withdrawal",
+
+                amount:
+                    Number(
+                        item.withdrawal
+                    ) || 0,
+
+                commission:
+                    Number(
+                        item.commission
+                    ) || 0
+
+            });
+
+        }
+    );
+
+
+    // ------------------------------------------------------
+    // SORT
+    // ------------------------------------------------------
+
+    updates.sort(
+        function(a, b) {
+
+            return (
+                new Date(b.date) -
+                new Date(a.date)
+            );
+
+        }
+    );
+
+
+    // ------------------------------------------------------
+    // DISPLAY
+    // ------------------------------------------------------
 
     updates
         .slice(0, 10)
-        .forEach(item => {
-
-            const row =
-                document.createElement("tr");
+        .forEach(
+            function(item) {
 
 
-            row.innerHTML = `
-
-                <td>${item.date}</td>
-
-                <td>${item.type}</td>
-
-                <td>${formatCurrency(item.amount)}</td>
-
-                <td>${formatCurrency(item.commission)}</td>
-
-            `;
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
 
 
-            table.appendChild(row);
+                row.innerHTML = `
 
-        });
+                    <td>
+                        ${item.date}
+                    </td>
+
+                    <td>
+                        ${item.type}
+                    </td>
+
+                    <td>
+                        ${formatCurrency(
+                            item.amount
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatCurrency(
+                            item.commission
+                        )}
+                    </td>
+
+                `;
+
+
+                table.appendChild(
+                    row
+                );
+
+            }
+        );
 
 }
 
 
-// ==========================================
+// ==========================================================
 // START PAGE
-// ==========================================
+// ==========================================================
 
 setDefaultDates();
 
