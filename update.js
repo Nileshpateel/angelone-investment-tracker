@@ -8,7 +8,7 @@
 // ==========================================================
 
 const API_URL =
-    "PASTE_YOUR_DEPLOYED_APPS_SCRIPT_URL_HERE";
+    "https://script.google.com/macros/s/AKfycbyExRmEKTvJrFaIUAjeXyFVApgCo447dzdGafEaUOPIz-vHpCUJ0crZktgAnxIKFPMPBQ/exec";
 
 
 // ==========================================================
