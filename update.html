@@ -1,43 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Daily Update - Angel One Tracker</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
+
 <body>
+
 
 <header class="top-header">
 
     <div>
+
         <h1>Daily Update</h1>
+
         <p>Angel One Investment Tracker</p>
+
     </div>
 
+
     <div>
-        <a href="index.html"
-           style="color:white;text-decoration:none;">
+
+        <a
+            href="index.html"
+            style="color:white;text-decoration:none;">
+
             ← Dashboard
+
         </a>
+
     </div>
 
 </header>
 
 
+
 <main>
+
+
+<!-- =====================================================
+     DAILY PROFIT
+====================================================== -->
 
 <section class="data-section">
 
+
     <div class="section-title">
 
-        <h2>Today's Profit</h2>
+        <h2>Daily Profit / Loss</h2>
 
         <p>
-            Enter the profit generated today.
+            Enter today's trading result.
         </p>
 
     </div>
@@ -45,9 +69,12 @@
 
     <div class="entry-form">
 
+
         <div>
 
-            <label>Date</label>
+            <label for="profitDate">
+                Date
+            </label>
 
             <input
                 type="date"
@@ -58,48 +85,78 @@
 
         <div>
 
-            <label>Profit Amount</label>
+            <label for="dailyProfit">
+                Profit
+            </label>
 
             <input
                 type="number"
                 id="dailyProfit"
-                placeholder="Enter profit">
+                placeholder="Enter profit"
+                min="0">
 
         </div>
 
 
         <div>
 
-            <label>Loss</label>
+            <label for="dailyLoss">
+                Loss
+            </label>
 
             <input
-                type="text"
-                value="NULL"
-                disabled>
+                type="number"
+                id="dailyLoss"
+                placeholder="Enter loss"
+                min="0"
+                value="0">
 
         </div>
 
 
-        <button onclick="saveProfit()">
+        <div>
 
-            Save Profit
+            <label for="profitNotes">
+                Notes
+            </label>
+
+            <input
+                type="text"
+                id="profitNotes"
+                placeholder="Optional">
+
+        </div>
+
+
+        <button
+            type="button"
+            onclick="saveProfit()">
+
+            Save Daily Result
 
         </button>
 
+
     </div>
+
 
 </section>
 
 
 
+<!-- =====================================================
+     WITHDRAWAL
+====================================================== -->
+
 <section class="data-section">
+
 
     <div class="section-title">
 
-        <h2>Today's Profit Withdrawal</h2>
+        <h2>Profit Withdrawal</h2>
 
         <p>
-            Record money withdrawn from your profit.
+            Enter the amount withdrawn from your profit.
         </p>
 
     </div>
@@ -107,9 +164,12 @@
 
     <div class="entry-form">
 
+
         <div>
 
-            <label>Date</label>
+            <label for="withdrawalDate">
+                Date
+            </label>
 
             <input
                 type="date"
@@ -120,31 +180,65 @@
 
         <div>
 
-            <label>Withdrawal Amount</label>
+            <label for="withdrawalAmount">
+                Withdrawal Amount
+            </label>
 
             <input
                 type="number"
                 id="withdrawalAmount"
-                placeholder="Example: 15000">
+                placeholder="Example: 15000"
+                min="1">
 
         </div>
 
 
-       
+        <div>
 
-        <button onclick="saveWithdrawal()">
+            <label for="withdrawalNotes">
+                Notes
+            </label>
+
+            <input
+                type="text"
+                id="withdrawalNotes"
+                placeholder="Optional">
+
+        </div>
+
+
+        <button
+            type="button"
+            onclick="saveWithdrawal()">
 
             Save Withdrawal
 
         </button>
 
+
     </div>
+
+
+    <div class="section-title">
+
+        <p>
+            Commission is calculated automatically at
+            <strong>17.80%</strong>.
+        </p>
+
+    </div>
+
 
 </section>
 
 
 
+<!-- =====================================================
+     TODAY'S SUMMARY
+====================================================== -->
+
 <section class="data-section">
+
 
     <div class="section-title">
 
@@ -155,9 +249,12 @@
 
     <div class="summary-grid">
 
+
         <div class="summary-card profit-card">
 
-            <span>Today's Profit</span>
+            <span>
+                Today's Net P&L
+            </span>
 
             <strong id="todayProfit">
                 ₹0
@@ -168,7 +265,9 @@
 
         <div class="summary-card withdrawal-card">
 
-            <span>Today's Withdrawal</span>
+            <span>
+                Today's Withdrawal
+            </span>
 
             <strong id="todayWithdrawal">
                 ₹0
@@ -179,7 +278,9 @@
 
         <div class="summary-card commission-card">
 
-            <span>Today's Commission</span>
+            <span>
+                Today's Commission
+            </span>
 
             <strong id="todayCommission">
                 ₹0
@@ -190,7 +291,9 @@
 
         <div class="summary-card net-card">
 
-            <span>Today's Net Received</span>
+            <span>
+                Today's Net Received
+            </span>
 
             <strong id="todayNet">
                 ₹0
@@ -198,12 +301,20 @@
 
         </div>
 
+
     </div>
+
 
 </section>
 
 
+
+<!-- =====================================================
+     RECENT UPDATES
+====================================================== -->
+
 <section class="data-section">
+
 
     <div class="section-title">
 
@@ -214,7 +325,9 @@
 
     <div class="table-container">
 
+
         <table>
+
 
             <thead>
 
@@ -237,25 +350,37 @@
 
             </tbody>
 
+
         </table>
+
 
     </div>
 
+
 </section>
+
 
 </main>
 
 
+
 <footer>
 
-    <p>Angel One Investment Tracker</p>
+    <p>
+        Angel One Investment Tracker
+    </p>
 
-    <span>Daily Update</span>
+    <span>
+        Daily Update
+    </span>
 
 </footer>
 
 
+
 <script src="update.js"></script>
 
+
 </body>
+
 </html>
