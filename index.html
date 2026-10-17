@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +13,7 @@
     <h1>Angel One Investment Tracker</h1>
     <p>Investment &amp; Profit Management Dashboard</p>
   </div>
-  <div class="date-display" id="todayDate"></div>
+  <div class="date-display">16 Oct 2026</div>
 </header>
 
 <section class="account-section">
@@ -36,115 +35,119 @@
 </section>
 
 <main>
+
+  <!-- FINANCIAL OVERVIEW -->
   <section class="dashboard-section">
     <div class="section-title">
       <h2>Financial Overview</h2>
-      <p>Financial position and collection targets</p>
-    </div>
-
-    <div style="text-align:center;margin-bottom:25px">
-      <a href="update.html"
-         style="display:inline-block;padding:12px 24px;background:#2563eb;color:white;text-decoration:none;border-radius:8px;font-weight:600">
-        + Update Today's Profit / Withdrawal
-      </a>
+      <p>Withdrawal summary through 16 October 2026</p>
     </div>
 
     <div class="summary-grid">
       <div class="summary-card capital-card">
         <span>Total Capital</span>
-        <strong id="totalCapital">₹21,00,000</strong>
+        <strong>₹21,00,000</strong>
         <small>Original invested capital</small>
       </div>
 
       <div class="summary-card profit-card">
-        <span>Current Profit</span>
-        <strong id="currentProfit">Loading...</strong>
-        <small>Based on saved financial records</small>
+        <span>Total Profit</span>
+        <strong>₹3,59,290</strong>
+        <small>Withdrawal plus commission</small>
       </div>
 
       <div class="summary-card withdrawal-card">
         <span>Total Withdrawn</span>
-        <strong id="totalWithdrawn">Loading...</strong>
-        <small>Recorded withdrawals</small>
+        <strong>₹3,05,000</strong>
+        <small>September and October</small>
       </div>
 
       <div class="summary-card commission-card">
         <span>Total Commission</span>
-        <strong id="totalCommission">Loading...</strong>
-        <small>Commission on recorded withdrawals</small>
+        <strong>₹54,290</strong>
+        <small>17.80% of withdrawals</small>
       </div>
 
       <div class="summary-card net-card">
         <span>Net Amount Received</span>
-        <strong id="netReceived">Loading...</strong>
-        <small>Recorded cash received</small>
+        <strong>₹3,05,000</strong>
+        <small>Withdrawal amount received</small>
       </div>
 
       <div class="summary-card today-card">
         <span>Today's P&amp;L</span>
-        <strong id="todayProfit">Loading...</strong>
-        <small>Today's recorded trading result</small>
+        <strong>Not provided</strong>
+        <small>Daily trading P&amp;L not included</small>
       </div>
     </div>
   </section>
 
-  <!-- COLLECTION TARGETS AS OF THE REPORTING DATE -->
+  <!-- SEPTEMBER COLLECTION -->
   <section class="data-section">
     <div class="section-title">
-      <h2>Collection Summary</h2>
-      <p id="reportingDateLabel">Reporting date: 15 October 2026</p>
+      <h2>September 2026 Collection</h2>
+      <p>Monthly withdrawal total: ₹1,95,000</p>
     </div>
 
     <div class="summary-grid">
       <div class="summary-card withdrawal-card">
-        <span>September Collection Target</span>
-        <strong id="septemberTarget">₹1,95,000</strong>
-        <small>Four weekly targets of ₹40,000 plus ₹35,000 for the final week</small>
+        <span>Week 1</span>
+        <strong>₹40,000</strong>
+        <small>1–4 September</small>
+      </div>
+
+      <div class="summary-card withdrawal-card">
+        <span>Week 2</span>
+        <strong>₹40,000</strong>
+        <small>7–11 September</small>
+      </div>
+
+      <div class="summary-card withdrawal-card">
+        <span>Week 3</span>
+        <strong>₹40,000</strong>
+        <small>14–18 September</small>
+      </div>
+
+      <div class="summary-card withdrawal-card">
+        <span>Week 4</span>
+        <strong>₹40,000</strong>
+        <small>21–25 September</small>
       </div>
 
       <div class="summary-card profit-card">
-        <span>October Target to Date</span>
-        <strong id="octoberTarget">Loading...</strong>
-        <small>₹10,000 per eligible trading day through 15 October</small>
+        <span>Week 5</span>
+        <strong>₹35,000</strong>
+        <small>28–30 September</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- OCTOBER COLLECTION -->
+  <section class="data-section">
+    <div class="section-title">
+      <h2>October 2026 Collection</h2>
+      <p>Through 16 October · ₹10,000 per eligible trading day</p>
+    </div>
+
+    <div class="summary-grid">
+      <div class="summary-card withdrawal-card">
+        <span>Eligible Trading Days</span>
+        <strong>11</strong>
+        <small>Weekends and 2 October excluded</small>
+      </div>
+
+      <div class="summary-card profit-card">
+        <span>October Collection</span>
+        <strong>₹1,10,000</strong>
+        <small>11 days × ₹10,000</small>
       </div>
 
       <div class="summary-card capital-card">
-        <span>Target Collection to Date</span>
-        <strong id="targetToDate">Loading...</strong>
-        <small>September target plus October target to date</small>
+        <span>Combined Collection</span>
+        <strong>₹3,05,000</strong>
+        <small>September plus October through 16 October</small>
       </div>
     </div>
-
-    <p style="margin-top:16px;color:#64748b">
-      These are target figures based on your collection rules. They are not
-      confirmed withdrawals and are not added to the actual financial totals.
-    </p>
-  </section>
-
-  <!-- FUTURE PLAN -->
-  <section class="data-section">
-    <div class="section-title">
-      <h2>Upcoming Collection Plan</h2>
-      <p>Future targets are displayed separately from present collections.</p>
-    </div>
-
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Week</th>
-            <th>Eligible Trading Days</th>
-            <th>Planned Collection</th>
-          </tr>
-        </thead>
-        <tbody id="futurePlanBody"></tbody>
-      </table>
-    </div>
-
-    <p style="margin-top:12px;color:#64748b">
-      Weekends and dates entered in the exchange-holiday list are excluded.
-      Update the holiday list whenever an exchange holiday is announced.
-    </p>
   </section>
 
   <!-- CAPITAL ALLOCATION -->
@@ -156,9 +159,13 @@
 
     <div class="allocation-group">
       <div class="group-header">
-        <div><h3>Equity Indices</h3><span>NIFTY + SENSEX</span></div>
+        <div>
+          <h3>Equity Indices</h3>
+          <span>NIFTY + SENSEX</span>
+        </div>
         <strong>₹8,00,000</strong>
       </div>
+
       <div class="allocation-items">
         <div class="allocation-item">
           <label>NIFTY</label>
@@ -168,6 +175,7 @@
           </div>
           <strong id="niftyAmount">₹4,00,000</strong>
         </div>
+
         <div class="allocation-item">
           <label>SENSEX</label>
           <div class="allocation-input">
@@ -181,9 +189,13 @@
 
     <div class="allocation-group">
       <div class="group-header">
-        <div><h3>Precious Metals</h3><span>GOLD + SILVER</span></div>
+        <div>
+          <h3>Precious Metals</h3>
+          <span>GOLD + SILVER</span>
+        </div>
         <strong>₹8,00,000</strong>
       </div>
+
       <div class="allocation-items">
         <div class="allocation-item">
           <label>GOLD</label>
@@ -193,6 +205,7 @@
           </div>
           <strong id="goldAmount">₹4,00,000</strong>
         </div>
+
         <div class="allocation-item">
           <label>SILVER</label>
           <div class="allocation-input">
@@ -212,6 +225,7 @@
         </div>
         <strong>₹5,00,000</strong>
       </div>
+
       <div class="allocation-items">
         <div class="allocation-item">
           <label>CRUDE OIL</label>
@@ -221,6 +235,7 @@
           </div>
           <strong id="crudeAmount">₹1,25,000</strong>
         </div>
+
         <div class="allocation-item">
           <label>GOLD MINI</label>
           <div class="allocation-input">
@@ -229,6 +244,7 @@
           </div>
           <strong id="goldMiniAmount">₹1,25,000</strong>
         </div>
+
         <div class="allocation-item">
           <label>SILVER MINI</label>
           <div class="allocation-input">
@@ -237,6 +253,7 @@
           </div>
           <strong id="silverMiniAmount">₹1,25,000</strong>
         </div>
+
         <div class="allocation-item">
           <label>NATURAL GAS</label>
           <div class="allocation-input">
@@ -249,12 +266,13 @@
     </div>
   </section>
 
-  <!-- ACTUAL WITHDRAWALS -->
+  <!-- SEPTEMBER WITHDRAWAL BREAKDOWN -->
   <section class="data-section">
     <div class="section-title">
-      <h2>Profit Withdrawal History</h2>
-      <p>Actual records loaded from the database</p>
+      <h2>September Withdrawal Breakdown</h2>
+      <p>Withdrawal amounts restricted to ₹15,000 and ₹10,000</p>
     </div>
+
     <div class="table-container">
       <table>
         <thead>
@@ -266,17 +284,87 @@
             <th>Net Received</th>
           </tr>
         </thead>
-        <tbody id="withdrawalTableBody">
-          <tr><td colspan="5">Loading withdrawal records...</td></tr>
+        <tbody>
+          <tr><td>01 Sep 2026</td><td>₹15,000</td><td>₹2,670</td><td>₹17,670</td><td>₹15,000</td></tr>
+          <tr><td>02 Sep 2026</td><td>₹15,000</td><td>₹2,670</td><td>₹17,670</td><td>₹15,000</td></tr>
+          <tr><td>03 Sep 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+
+          <tr><td>07 Sep 2026</td><td>₹15,000</td><td>₹2,670</td><td>₹17,670</td><td>₹15,000</td></tr>
+          <tr><td>08 Sep 2026</td><td>₹15,000</td><td>₹2,670</td><td>₹17,670</td><td>₹15,000</td></tr>
+          <tr><td>09 Sep 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+
+          <tr><td>15 Sep 2026</td><td>₹15,000</td><td>₹2,670</td><td>₹17,670</td><td>₹15,000</td></tr>
+          <tr><td>16 Sep 2026</td><td>₹15,000</td><td>₹2,670</td><td>₹17,670</td><td>₹15,000</td></tr>
+          <tr><td>17 Sep 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+
+          <tr><td>21 Sep 2026</td><td>₹15,000</td><td>₹2,670</td><td>₹17,670</td><td>₹15,000</td></tr>
+          <tr><td>22 Sep 2026</td><td>₹15,000</td><td>₹2,670</td><td>₹17,670</td><td>₹15,000</td></tr>
+          <tr><td>23 Sep 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+
+          <tr><td>28 Sep 2026</td><td>₹15,000</td><td>₹2,670</td><td>₹17,670</td><td>₹15,000</td></tr>
+          <tr><td>29 Sep 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+          <tr><td>30 Sep 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+
+          <tr>
+            <th>September Total</th>
+            <th>₹1,95,000</th>
+            <th>₹34,710</th>
+            <th>₹2,29,710</th>
+            <th>₹1,95,000</th>
+          </tr>
         </tbody>
       </table>
     </div>
   </section>
 
+  <!-- OCTOBER WITHDRAWAL BREAKDOWN -->
+  <section class="data-section">
+    <div class="section-title">
+      <h2>October Withdrawal Breakdown</h2>
+      <p>1–16 October 2026 · trading holidays excluded</p>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Withdrawal</th>
+            <th>Commission</th>
+            <th>Profit Amount</th>
+            <th>Net Received</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>01 Oct 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+          <tr><td>05 Oct 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+          <tr><td>06 Oct 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+          <tr><td>07 Oct 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+          <tr><td>08 Oct 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+          <tr><td>09 Oct 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+          <tr><td>12 Oct 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+          <tr><td>13 Oct 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+          <tr><td>14 Oct 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+          <tr><td>15 Oct 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+          <tr><td>16 Oct 2026</td><td>₹10,000</td><td>₹1,780</td><td>₹11,780</td><td>₹10,000</td></tr>
+
+          <tr>
+            <th>October Total</th>
+            <th>₹1,10,000</th>
+            <th>₹19,580</th>
+            <th>₹1,29,580</th>
+            <th>₹1,10,000</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- DAILY P&L -->
   <section class="data-section">
     <div class="section-title">
       <h2>Daily Profit / Loss</h2>
-      <p>Actual trading results loaded from the database</p>
+      <p>Daily trading results have not been supplied</p>
     </div>
     <div class="table-container">
       <table>
@@ -288,171 +376,113 @@
             <th>Net P&amp;L</th>
           </tr>
         </thead>
-        <tbody id="profitTableBody">
-          <tr><td colspan="4">Loading daily results...</td></tr>
+        <tbody>
+          <tr>
+            <td colspan="4">Daily profit/loss data not included in this fixed display.</td>
+          </tr>
         </tbody>
       </table>
     </div>
   </section>
 
+  <!-- PROFIT CHART -->
   <section class="chart-section">
-    <div class="section-title"><h2>Profit Performance</h2></div>
-    <div class="chart-container"><canvas id="profitChart"></canvas></div>
+    <div class="section-title">
+      <h2>Profit Performance</h2>
+    </div>
+    <div class="chart-container">
+      <canvas id="profitChart"></canvas>
+    </div>
   </section>
+
 </main>
 
 <footer>
   <p>Angel One Investment Tracker</p>
-  <span>Personal Investment Record</span>
+  <span>Personal Investment Record · Fixed display through 16 October 2026</span>
 </footer>
 
 <script>
-  /*
-   * REPORTING DATE
-   * Keep fixed at 15 October 2026 for this update.
-   * Set USE_LIVE_DATE to true later to follow the current date automatically.
-   */
-  const USE_LIVE_DATE = false;
-  const FIXED_REPORTING_DATE = "2026-10-15";
-
-  /*
-   * Add official exchange holidays as YYYY-MM-DD.
-   * 2 October 2026 is included as Gandhi Jayanti.
-   * Verify the full exchange holiday calendar before relying on the targets.
-   */
-  const EXCHANGE_HOLIDAYS = ["2026-10-02"];
-
-  const SEPTEMBER_TARGET = 195000;
-  const DAILY_TARGET = 10000;
-  const OCTOBER_START = "2026-10-01";
-  const PLAN_WEEKS_AHEAD = 8;
-
-  const money = n => "₹" + Number(n || 0).toLocaleString("en-IN", {
-    maximumFractionDigits: 0
-  });
-
-  function isoDate(date) {
-    return [
-      date.getFullYear(),
-      String(date.getMonth() + 1).padStart(2, "0"),
-      String(date.getDate()).padStart(2, "0")
-    ].join("-");
-  }
-
-  function parseDate(iso) {
-    const [y, m, d] = iso.split("-").map(Number);
-    return new Date(y, m - 1, d);
-  }
-
-  function isTradingDay(date) {
-    const weekday = date.getDay();
-    return weekday !== 0 &&
-           weekday !== 6 &&
-           !EXCHANGE_HOLIDAYS.includes(isoDate(date));
-  }
-
-  function countTradingDays(startISO, endISO) {
-    let count = 0;
-    const day = parseDate(startISO);
-    const end = parseDate(endISO);
-
-    while (day <= end) {
-      if (isTradingDay(day)) count++;
-      day.setDate(day.getDate() + 1);
-    }
-    return count;
-  }
-
-  function getReportingDate() {
-    return USE_LIVE_DATE ? new Date() : parseDate(FIXED_REPORTING_DATE);
-  }
-
-  function renderCollectionSummary() {
-    const reportDate = getReportingDate();
-    const reportISO = isoDate(reportDate);
-
-    document.getElementById("todayDate").textContent =
-      reportDate.toLocaleDateString("en-IN", {
-        day: "2-digit", month: "short", year: "numeric"
-      });
-
-    document.getElementById("reportingDateLabel").textContent =
-      "Reporting date: " + reportDate.toLocaleDateString("en-IN", {
-        day: "2-digit", month: "long", year: "numeric"
-      });
-
-    const octoberEnd = reportISO < OCTOBER_START ? null : reportISO;
-    const octoberDays = octoberEnd
-      ? countTradingDays(OCTOBER_START, octoberEnd)
-      : 0;
-
-    const octoberTarget = octoberDays * DAILY_TARGET;
-    document.getElementById("septemberTarget").textContent = money(SEPTEMBER_TARGET);
-    document.getElementById("octoberTarget").textContent = money(octoberTarget);
-    document.getElementById("targetToDate").textContent =
-      money(SEPTEMBER_TARGET + octoberTarget);
-
-    renderFuturePlan(reportDate);
-  }
-
-  function renderFuturePlan(reportDate) {
-    const body = document.getElementById("futurePlanBody");
-    body.replaceChildren();
-
-    // Start with the next calendar day. No future target is included in totals.
-    const start = new Date(reportDate);
-    start.setDate(start.getDate() + 1);
-
-    // Move to the next Monday.
-    while (start.getDay() !== 1) {
-      start.setDate(start.getDate() + 1);
-    }
-
-    for (let week = 0; week < PLAN_WEEKS_AHEAD; week++) {
-      const monday = new Date(start);
-      monday.setDate(start.getDate() + week * 7);
-
-      const friday = new Date(monday);
-      friday.setDate(monday.getDate() + 4);
-
-      const tradingDays = countTradingDays(isoDate(monday), isoDate(friday));
-      const tr = document.createElement("tr");
-
-      const weekLabel =
-        monday.toLocaleDateString("en-IN", { day: "2-digit", month: "short" }) +
-        " – " +
-        friday.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
-
-      [weekLabel, String(tradingDays), money(tradingDays * DAILY_TARGET)]
-        .forEach(value => {
-          const td = document.createElement("td");
-          td.textContent = value;
-          tr.appendChild(td);
-        });
-
-      body.appendChild(tr);
-    }
-  }
-
   function updateAllocation() {
-    const percent = id => Math.max(0, Math.min(100,
-      Number(document.getElementById(id).value) || 0));
+    const money = value =>
+      "₹" + Math.round(value).toLocaleString("en-IN");
 
-    document.getElementById("niftyAmount").textContent = money(800000 * percent("niftyPercent") / 100);
-    document.getElementById("sensexAmount").textContent = money(800000 * percent("sensexPercent") / 100);
-    document.getElementById("goldAmount").textContent = money(800000 * percent("goldPercent") / 100);
-    document.getElementById("silverAmount").textContent = money(800000 * percent("silverPercent") / 100);
-    document.getElementById("crudeAmount").textContent = money(500000 * percent("crudePercent") / 100);
-    document.getElementById("goldMiniAmount").textContent = money(500000 * percent("goldMiniPercent") / 100);
-    document.getElementById("silverMiniAmount").textContent = money(500000 * percent("silverMiniPercent") / 100);
-    document.getElementById("gasAmount").textContent = money(500000 * percent("gasPercent") / 100);
+    const getPercent = id => {
+      const element = document.getElementById(id);
+      const value = Number(element.value) || 0;
+      return Math.max(0, Math.min(100, value));
+    };
+
+    document.getElementById("niftyAmount").textContent =
+      money(800000 * getPercent("niftyPercent") / 100);
+
+    document.getElementById("sensexAmount").textContent =
+      money(800000 * getPercent("sensexPercent") / 100);
+
+    document.getElementById("goldAmount").textContent =
+      money(800000 * getPercent("goldPercent") / 100);
+
+    document.getElementById("silverAmount").textContent =
+      money(800000 * getPercent("silverPercent") / 100);
+
+    document.getElementById("crudeAmount").textContent =
+      money(500000 * getPercent("crudePercent") / 100);
+
+    document.getElementById("goldMiniAmount").textContent =
+      money(500000 * getPercent("goldMiniPercent") / 100);
+
+    document.getElementById("silverMiniAmount").textContent =
+      money(500000 * getPercent("silverMiniPercent") / 100);
+
+    document.getElementById("gasAmount").textContent =
+      money(500000 * getPercent("gasPercent") / 100);
   }
 
-  renderCollectionSummary();
-  updateAllocation();
+  // Static profit performance chart
+  window.addEventListener("DOMContentLoaded", function () {
+    if (typeof Chart === "undefined") return;
+
+    const canvas = document.getElementById("profitChart");
+    if (!canvas) return;
+
+    new Chart(canvas, {
+      type: "bar",
+      data: {
+        labels: ["September 2026", "October through 16 Oct"],
+        datasets: [{
+          label: "Total Profit",
+          data: [229710, 129580],
+          backgroundColor: ["#2563eb", "#16a34a"]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: true },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                return "₹" + context.raw.toLocaleString("en-IN");
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function (value) {
+                return "₹" + Number(value).toLocaleString("en-IN");
+              }
+            }
+          }
+        }
+      }
+    });
+  });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="script.js"></script>
+
 </body>
 </html>
